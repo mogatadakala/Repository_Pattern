@@ -21,9 +21,10 @@ namespace RepositoryApp.Controllers
         [HttpGet]
         public async Task<IEnumerable<Customers>> getdetails()
         {
+            //Cache key Functionality
             var cachekey = "customerslist";
             if(!_memorycache.TryGetValue(cachekey,out IEnumerable<Customers> customersList))
-                {
+            {
                 customersList = await _customerrepo.GetAllCustomers();
                 var cacheExpiryoptions = new MemoryCacheEntryOptions
                 {
